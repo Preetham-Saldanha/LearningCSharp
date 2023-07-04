@@ -1,0 +1,194 @@
+1. Namespaces - they dont correspond to different directories, folders or assembly names.
+              - they could be written in seperate files or assemblies and still belong to same namespace.
+	      - Two different namespaces in 2 different projects can be used in each other via creating a reference                   
+               in Visual studio
+
+
+2. classes - they contain data and behaviour.
+     
+3. static constructors  - They do not allow any access modifier.
+			- they are called at the begining before, when any part of the class is executed (either main method or before object creation of type of that class).( hence executed only once and not for every object creation)
+
+4. our assembly can have only one entry point i,e. only one psvm method
+
+
+lec-23
+5. Polymorphism(run time) enables us to invoke derived class methods through base class reference variables.
+  we use Virtual/Abstract( on parent method) and override(on child method) keywords to acheive this.
+  else while doing Phone vivo = new Smartphone(); the phone's methods will be invoked instead of smartphone since we used Phone as reference variable.
+
+
+lec-24
+6. Method hiding is done using new keyword.
+   if we do Phone vivo= new Smartphone(); base class method will be invoked( phone's).
+
+lec-25
+7. In c# methods can be overloaded using number of parameters, types of params and kinds of params. but not on return type and params keyword
+
+
+lec - 27
+8. get and set are called as accessors. Used to carry out encapsulation. 
+inside set, value keyword is used to access the passed value .
+public int Age{
+
+get {
+return this._age;
+
+}
+
+set{
+
+this._age = value;
+}
+}
+
+9. remove get/set to make a property writeOnly/readOnly.
+
+10. if we write 
+
+public int likes{
+
+get;
+set;
+
+}  then compiler will create a private feild out of this, ( private int likes;)
+
+this is called auto implemented properties , normally used when there is no logic in the getter or setters.
+
+
+lec 29:
+
+11. Diff btwn structs vs classes:  ( same difference as value vs reference type)
+    
+    1. classes are reference types, but structs are value types.
+    2.hence classes are stored in heap( means the objects are stored in heap but reference variable pointing to         	that object is in stack itself), structs are stored in stacks.
+     3. value types are destroyed immediately after the scope is lost , whereas reference type only reference is desroyed while scope is lost but the objects are garbage collected only later.
+
+  4.IMPORTANT When you copy one struct to another, a new copy gets created and any modifications one will not affect the other. whereas a copy of class into other means just a new reference is created but point to a single object.
+
+5. structures cant have destructor, classes can.
+
+6. structs cannot have parameter less constructors wheareas classes can.
+
+7. structs can only inherit from interfaces . classes can inherit from both interfaces and other classes.
+
+12. class or structs cannot inherit from structs , structs are sealed types.
+
+
+lec 30: Interfaces
+
+1. Interface members can only have declaration and not definition.
+
+interface ICustomer{
+ void print();
+}
+
+2. Interface members are public by default.( hence you cannot have access modifiers on interface member).
+
+3. Interfaces cannot contain feild but can contain properties.
+
+
+ABOUT PROPERTIES:
+
+1. Properties combine aspects of both fields and methods.
+2. To the user of an object, a property appears to be a field, accessing the property requires the same syntax.
+3. Unlike fields, properties aren't classified as variables. Therefore, you can't pass a property as a ref or out parameter.
+
+Properties have many uses: they can validate data before allowing a change; they can transparently expose data on a class where that data is retrieved from ETC.
+
+lec 31:EXPLICIT INTERFACE IMPLEMENTATION.
+
+13. If a class implements 2 interfaces containing same methods with same signature, then we access individual methods through explicit interface implementation.
+  1. cannot use any access modifiers while implementing that.
+  2. let say there are 2 interfaces,I1 and I2,
+      class C1 : I1, I2{
+
+	void I1.print(){
+
+	}
+     
+	void I2.print(){
+
+	}   
+
+	public static void main(string[] args){
+	C1 test = new C1;
+	 ((I1)test).print();  //this is the only way to invoke the interface method- BY USING INTERFACE REFERENCE 													VARIABLE
+	 ((I2)test).print();
+
+test.print(); //this will give error since we did not cast the method using any of the interface.
+
+	}  
+      }
+ 3. we can keep a method default  by implementing it normally in our class and other interface methods( with same      	signatures ofcourse) explicitly.
+
+ class C1 : I1, I2{
+
+	void print(){          // if we just test.print() this method will be called by default without any casting.
+
+	}
+     
+	void I2.print(){
+
+	} 
+
+}
+
+
+ABSTRACT CLASSES:
+lec 32:
+
+14. 1. if a class inherits from an abstract parent class then the class has 2 options,
+
+    a) either implement all the abstract members . b) or make the child class itself an abstract.
+
+    2. abstract class cannot be instantiated or sealed
+
+    3.abstract class may contain abstract member but it it not mandatory.
+
+
+ABSTRACT CLASSES vs INTERFACES:
+lec 33:
+1.abstract classes can have implementation for some of its members, but interfaces can not have any of its members implement any abstract method.
+2. Abstract class members are private by default, but public for interfaces.
+3. Abstract classes can have feilds whereas interface can not have feilds.
+4. An abstract class can inherit from another abstract class or another interface but interface can only inherit      from other interfaces.
+5. class can inherit from multiple interfaces but not multiple classes.
+6. class members  can have access modifiers but interface members cannot.
+
+
+
+DELEGATE:
+1. It is a type safe function pointer.
+2. signature of method and the delegate used to point that method must both be same.
+3. delegates can be used like classes, i.e, we can instantiate an object.
+ Tip to remember syntax: delegates are declared just like methods but with extra keyword called delegate.
+
+
+lec 39:MULTICAST DELEGATE: used for observer design pattern( publisher/subscriber)
+
+15. 
+1.It is a delegate that points to multiple functions.
+2.It invokes function in the same order as they are added.
+
+3. we can use +/+= to register and -/-= to unregister a method with delegate.
+4.if a delegate has return type other than void and it is a multicast delegate, 
+
+  -> only the last method invoked value will be returned.
+
+  -> if there is an output parameter, the value of output parameter will be the value assigned by last method. 
+
+lec 40: exception handling
+
+1. Try, catch and finally.
+
+
+can we create a static property in c#?
+
+Int32.parse vs Convert.ToInt32?
+
+
+
+
+
+
