@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace ProductCatalogueAssignment
+{
+    public struct Manufacturer_Details
+    {
+        private string _Name;
+        private string _Address;
+
+        public void printStuff()
+        {
+            Console.WriteLine("makar");
+        }
+        public Manufacturer_Details()
+        {
+            _Name = string.Empty;
+            _Address = string.Empty;
+            
+        }
+        public Manufacturer_Details(string Name, string Address)
+        {
+            _Name =Name;
+            _Address=Address;
+           
+        }
+
+        public string Name { get { return _Name;} }
+        public string Address { get { return _Address;} }
+     
+    }
+    public class ProductDetails
+    {
+   
+        private Manufacturer_Details _md;
+        private List<string> _Variants;
+        private long _EAN;
+        
+        public long EAN
+        {
+            get;
+            set;
+        }
+        
+        public Manufacturer_Details MD
+        {
+            get { return _md; }
+            set { _md = value; }
+        }
+        public List<string> Variants
+        {
+            get { return _Variants; }
+            set { _Variants = value; }
+        }
+    }
+    internal class Product
+    {
+        public static Dictionary<string, ProductDetails> Catalogue
+        {
+            get; set;
+        }
+        static Product() {
+            Catalogue = new Dictionary<string, ProductDetails>();
+            }
+
+        public static void Main(string[] args)
+        {
+
+            ProductDetails p = new ProductDetails();
+           
+            Console.WriteLine();
+            Product product = new Product();
+            ProductDetails item1 = new ProductDetails(
+            )
+            {
+                EAN = 12345678912,
+                MD = new Manufacturer_Details("Red Rock Engineering Works", "Avenue Street, US") { },
+                Variants = new List<string>() { "Wood", "Iron", "Carbon" }
+            };
+
+
+            ProductDetails item2 = new ProductDetails(
+            )
+            {
+                EAN = 56781234913,
+                MD = new Manufacturer_Details("Smart Design Interiors", "Downtown Calgary, Canada") { },
+                Variants = new List<string>() { "Blue", "Pink", "Brown" }
+            };
+            Catalogue.Add("Door", item1);
+            Catalogue.Add("WallPaper", item2);
+
+            foreach (ProductDetails item in Catalogue.Values)
+            {
+                Console.WriteLine(item.MD.Address);
+            }
+
+
+            
+            Console.WriteLine(Product.Catalogue.ToString());
+        }
+
+        
+    }
+
+  
+}

@@ -120,7 +120,7 @@ test.print(); //this will give error since we did not cast the method using any 
 
 	}  
       }
- 3. we can keep a method default  by implementing it normally in our class and other interface methods( with same      	signatures ofcourse) explicitly.
+ 3. we can keep a method default  by implementing it normally in our class and other interface methods( with same	signatures ofcourse) explicitly.
 
  class C1 : I1, I2{
 
